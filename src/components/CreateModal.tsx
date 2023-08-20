@@ -3,7 +3,7 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from 'zod'
 import { useAppDispatch, useAppSelector } from '../hooks/redux-hooks';
-import { addBook } from '../store/book-actions';
+import { addBook, updateBook } from '../store/book-actions';
 import { ModalProps } from '../types';
 
 const CreateModal = ({ onClose }: ModalProps) => {
@@ -33,7 +33,12 @@ const CreateModal = ({ onClose }: ModalProps) => {
     });
 
     const onSubmit: SubmitHandler<ValidationSchema> = (data: ValidationSchema) => {
-        dispatch(addBook(data));
+        console.log("data", data)
+        if (isEditable) {
+            dispatch(updateBook(data));
+        } else {
+            dispatch(addBook(data));
+        }
         onClose();
     };
 

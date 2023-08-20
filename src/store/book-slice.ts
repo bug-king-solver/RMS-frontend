@@ -8,6 +8,7 @@ const initialBookState: BookStateType = {
     deleteModalOpened: false,
     isEditable: false,
     editableBook: {
+        id: undefined,
         title: '',
         desc: '',
         isPublished: undefined,
@@ -36,11 +37,20 @@ const bookSlice = createSlice({
         addBook(state, action: PayloadAction<BookItemType>) {
             state.allBooks.push(action.payload);
         },
+        updateBook(state, action: PayloadAction<BookItemType>) {
+            state.allBooks = state.allBooks.map(book => book.id === action.payload.id ? book = action.payload : book);
+        },
         deleteBook(state) {
             state.allBooks = state.allBooks.filter(book => book.title !== state.deletableTitle);
         },
         setEditableStatus(state, action: PayloadAction<boolean>) {
             state.isEditable = action.payload;
+            state.editableBook = {
+                title: '',
+                desc: '',
+                body: '',
+                isPublished: undefined
+            }
         },
         setEditableBook(state, action: PayloadAction<BookItemType>) {
             state.editableBook = action.payload;

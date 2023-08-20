@@ -1,4 +1,5 @@
 export interface BookItemType {
+    id?: number | undefined;
     title: string;
     desc: string;
     body: string;

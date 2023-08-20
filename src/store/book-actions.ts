@@ -35,6 +35,12 @@ export const addBook = (data: BookItemType): ThunkAction<void, RootState, unknow
     }
 }
 
+export const updateBook = (data: BookItemType): ThunkAction<void, RootState, unknown, AnyAction> => {
+    return async(dispatch, getState) => {
+        dispatch(bookActions.updateBook(data));
+    }
+}
+
 export const deleteBook = (): ThunkAction<void, RootState, unknown, AnyAction> => {
     return async(dispatch, getState) => {
         dispatch(bookActions.deleteBook());
