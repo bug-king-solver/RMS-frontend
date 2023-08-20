@@ -1,17 +1,15 @@
-import { tableItemType } from "../types";
+import { BookItemType } from "../types";
 
-export const datas: tableItemType[] = [
+export const datas: BookItemType[] = [
     {
-        id: 1,
         title: "React 18",
-        published: true,
+        isPublished: true,
         desc: "This is a description of React 18 ",
         body: "This is React 18",
     },
     {
-        id: 2,
         title: "React 17",
-        published: false,
+        isPublished: false,
         desc: "This is a description of React 17 ",
         body: "This is React 17",
     }
