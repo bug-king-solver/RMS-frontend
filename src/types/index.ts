@@ -22,12 +22,6 @@ export interface GraphQLBookType {
     error: ApolloError | undefined;
 }
 
-export interface GraphQLBooksType {
-    books: BookItemType[];
-    loading: boolean;
-    error: ApolloError | undefined;
-}
-
 export interface BookStateType {
     createModalOpened: boolean;
     deleteModalOpened: boolean;
@@ -43,7 +37,7 @@ export interface UpdateBookItemType {
 };
 
 export interface BookItemPropsType {
-    itemData: BookItemType;
+    item: BookItemType;
 };
 
 export interface ModalProps {

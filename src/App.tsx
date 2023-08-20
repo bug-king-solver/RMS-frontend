@@ -12,10 +12,6 @@ function App() {
   const createModalOpened = useAppSelector(state => state.book.createModalOpened);
   const deleteModalOpened = useAppSelector(state => state.book.deleteModalOpened);
 
-  const openModal = () => {
-    dispatch(createModalStatausChange(true));
-  };
-  
   const closeModal = () => {
     if (createModalOpened) {
       dispatch(createModalStatausChange(false));
@@ -33,11 +29,6 @@ function App() {
           <p className='font-mono font-medium text-3xl'> 
             Book Management System
           </p>
-        </div>
-        <div className='flex justify-end'>
-          <button className="rounded-lg border-solid border-2 border-gray-300 p-2 mr-5 md:w-40 hover:border-gray-500" onClick={openModal}>
-            New
-          </button>
         </div>
         <BookTable /> 
         {

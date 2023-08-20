@@ -3,23 +3,23 @@ import { deleteModalStatusChange, editableStatusChange, createModalStatausChange
 import { BookItemPropsType } from "../types";
 import { truncateText } from "../utils/truncateText";
 
-const TableItem = ({ itemData }: BookItemPropsType) => {
+const TableItem = ({ item }: BookItemPropsType) => {
 
     const dispatch = useAppDispatch()
 
     const handleEdit = () => {
         dispatch(createModalStatausChange(true));
         dispatch(editableStatusChange(true));
-        dispatch(setEditableData(itemData));
+        dispatch(setEditableData(item));
     }
 
     const handleDelete = () => {
         dispatch(deleteModalStatusChange(true));
-        dispatch(setDeletableId(Number(itemData.id)))
+        dispatch(setDeletableId(Number(item.id)))
     }
 
     const handleLook = () => {
-        dispatch(setEditableData(itemData));
+        dispatch(setEditableData(item));
         dispatch(lookingStatusChange(true));
         dispatch(createModalStatausChange(true));
     }
@@ -27,10 +27,10 @@ const TableItem = ({ itemData }: BookItemPropsType) => {
     return (
         <tr className="hover:bg-gray-50">
             <th className="flex gap-3 px-6 py-4 font-normal text-gray-900">
-                <span> { itemData.title } </span>
+                <span> { item.title } </span>
             </th>
             <td className="px-6 py-4">
-                {itemData.isPublished ? <span
+                {item.isPublished ? <span
                     className="inline-flex items-center gap-1 rounded-full bg-green-50 px-2 py-1 text-xs font-semibold text-green-600"
                 >
                     <span className="h-1.5 w-1.5 rounded-full bg-green-600"></span>
@@ -43,11 +43,11 @@ const TableItem = ({ itemData }: BookItemPropsType) => {
                 </span>}
             </td>
             <td className="px-6 py-4">
-                <span> { truncateText(itemData.desc) } </span> 
+                <span> { truncateText(item.desc) } </span> 
             </td>
             <td className="px-6 py-4">
                 <span>
-                    { truncateText(itemData.body, 40) }
+                    { truncateText(item.body, 40) }
                 </span>
             </td>
             <td className="px-6 py-4">
