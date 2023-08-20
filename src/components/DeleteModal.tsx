@@ -1,9 +1,6 @@
 import { useAppDispatch } from "../hooks/redux-hooks";
 import { deleteBook, deleteModalStatusChange } from "../store/book-actions";
-
-interface ModalProps {
-  onClose: () => void;
-}
+import { ModalProps } from "../types";
 
 const DeleteModal = ({ onClose }: ModalProps) => {
 

@@ -4,10 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from 'zod'
 import { useAppDispatch, useAppSelector } from '../hooks/redux-hooks';
 import { addBook } from '../store/book-actions';
-
-interface ModalProps {
-  onClose: () => void;
-}
+import { ModalProps } from '../types';
 
 const CreateModal = ({ onClose }: ModalProps) => {
 

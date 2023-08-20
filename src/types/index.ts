@@ -23,3 +23,8 @@ export interface UpdateBookItemType {
 export interface BookItemPropsType {
     itemData: BookItemType;
 };
+
+export interface ModalProps {
+    onClose: () => void;
+}
+  
