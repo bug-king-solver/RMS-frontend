@@ -31,7 +31,7 @@ const BookTable = () => {
                     </thead> 
                     <tbody className="divide-y divide-gray-100 border-t border-gray-100">
                         {
-                            allBooks.map((data, index) => <TableItem tableData={data} key={index} />)
+                            allBooks.map((data, index) => <TableItem itemData={data} key={index} />)
                         }    
                     </tbody>
                 </table>

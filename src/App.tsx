@@ -1,19 +1,28 @@
-import React, { useState } from 'react';
 import BookTable from './components/BookTable';
 import './App.css';
 import CreateModal from './components/CreateModal';
+import DeleteModal from './components/DeleteModal';
+import { useAppDispatch, useAppSelector } from './hooks/redux-hooks';
+import { editableStatusChange, modalStatausChange, deleteModalStatusChange } from './store/book-actions';
 
 
 function App() {
   
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  
+  const dispatch = useAppDispatch();
+  const createModalOpened = useAppSelector(state => state.book.createModalOpened);
+  const deleteModalOpened = useAppSelector(state => state.book.deleteModalOpened);
+
   const openModal = () => {
-    setIsModalOpen(true);
+    dispatch(modalStatausChange(true));
   };
   
   const closeModal = () => {
-    setIsModalOpen(false);
+    if (createModalOpened) {
+      dispatch(modalStatausChange(false));
+      dispatch(editableStatusChange(false));
+    } else if (deleteModalOpened) {
+      dispatch(deleteModalStatusChange(false));
+    }
   };
   
   return (
@@ -28,11 +37,14 @@ function App() {
           <button className="rounded-lg border-solid border-2 border-gray-300 p-2 mr-5 md:w-40 hover:border-gray-500" onClick={openModal}>
             New
           </button>
-          {
-            isModalOpen ? <CreateModal onClose={closeModal} /> : null
-          }
         </div>
-        <BookTable />
+        <BookTable /> 
+        {
+          createModalOpened ? <CreateModal onClose={closeModal} /> : null
+        }
+        {
+          deleteModalOpened ? <DeleteModal onClose={closeModal} /> : null
+        }
       </div>
     </div>
   );

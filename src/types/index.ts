@@ -7,8 +7,11 @@ export interface BookItemType {
 
 export interface BookStateType {
     isLoading: boolean;
+    createModalOpened: boolean;
+    deleteModalOpened: boolean;
     isEditable: boolean;
     editableBook: BookItemType;
+    deletableTitle: string;
     allBooks: BookItemType[];
 }
 
@@ -18,5 +21,5 @@ export interface UpdateBookItemType {
 };
 
 export interface BookItemPropsType {
-    tableData: BookItemType;
+    itemData: BookItemType;
 };
