@@ -1,5 +1,5 @@
 import { useAppDispatch } from "../hooks/redux-hooks";
-import { deleteModalStatusChange, editableStatusChange, modalStatausChange, setDeletableTitle, setEditableData } from "../store/book-actions";
+import { deleteModalStatusChange, editableStatusChange, createModalStatausChange, setDeletableId, setEditableData } from "../store/book-actions";
 import { BookItemPropsType } from "../types";
 import { truncateText } from "../utils/truncateText";
 
@@ -8,15 +8,14 @@ const TableItem = ({ itemData }: BookItemPropsType) => {
     const dispatch = useAppDispatch()
 
     const handleEdit = () => {
-        dispatch(modalStatausChange(true));
+        dispatch(createModalStatausChange(true));
         dispatch(editableStatusChange(true));
         dispatch(setEditableData(itemData));
-        console.log(itemData)
     }
 
     const handleDelete = () => {
         dispatch(deleteModalStatusChange(true));
-        dispatch(setDeletableTitle(Number(itemData.id)))
+        dispatch(setDeletableId(Number(itemData.id)))
     }
 
     return (

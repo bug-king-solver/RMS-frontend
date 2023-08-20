@@ -28,27 +28,6 @@ const bookSlice = createSlice({
         setDeleteModalStatus(state, action: PayloadAction<boolean>) {
             state.deleteModalOpened = action.payload;
         },
-        setIsLoding(state, action: PayloadAction<boolean>) {
-            state.isLoading = action.payload;
-        },
-        setBooks(state, action: PayloadAction<BookItemType[]>){
-            state.allBooks = action.payload;
-        },
-        addBook(state, action: PayloadAction<BookItemType>) {
-            const data = action.payload;
-            data.id = state.allBooks.length + 1;
-            state.allBooks.push(data);
-        },
-        updateBook(state, action: PayloadAction<BookItemType>) {
-            const data = {
-                id: state.editableBook.id,
-                ...action.payload,
-            }
-            state.allBooks = state.allBooks.map(book => book.id === state.editableBook.id ? data : book);
-        },
-        deleteBook(state) {
-            state.allBooks = state.allBooks.filter(book => book.id !== state.deletableId);
-        },
         setEditableStatus(state, action: PayloadAction<boolean>) {
             state.isEditable = action.payload;
             state.editableBook = {
@@ -61,7 +40,7 @@ const bookSlice = createSlice({
         setEditableBook(state, action: PayloadAction<BookItemType>) {
             state.editableBook = action.payload;
         },
-        setDelectableBook(state, action: PayloadAction<number>) {
+        setDelectableBookId(state, action: PayloadAction<number>) {
             state.deletableId = action.payload;
         }
     }

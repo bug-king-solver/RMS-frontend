@@ -3,7 +3,7 @@ import './App.css';
 import CreateModal from './components/CreateModal';
 import DeleteModal from './components/DeleteModal';
 import { useAppDispatch, useAppSelector } from './hooks/redux-hooks';
-import { editableStatusChange, modalStatausChange, deleteModalStatusChange } from './store/book-actions';
+import { editableStatusChange, createModalStatausChange, deleteModalStatusChange } from './store/book-actions';
 
 
 function App() {
@@ -13,12 +13,12 @@ function App() {
   const deleteModalOpened = useAppSelector(state => state.book.deleteModalOpened);
 
   const openModal = () => {
-    dispatch(modalStatausChange(true));
+    dispatch(createModalStatausChange(true));
   };
   
   const closeModal = () => {
     if (createModalOpened) {
-      dispatch(modalStatausChange(false));
+      dispatch(createModalStatausChange(false));
       dispatch(editableStatusChange(false));
     } else if (deleteModalOpened) {
       dispatch(deleteModalStatusChange(false));
