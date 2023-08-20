@@ -24,6 +24,12 @@ export const editableStatusChange = (status: boolean): ThunkAction<void, RootSta
     }
 } 
 
+export const lookingStatusChange = (status: boolean): ThunkAction<void, RootState, unknown, AnyAction> => {
+    return async(dispatch) => {
+        dispatch(bookActions.setLookingStatus(status));
+    }
+}
+
 export const setEditableData = (data: BookItemType): ThunkAction<void, RootState, unknown, AnyAction> => {
     return async(dispatch, getState) => {
         dispatch(bookActions.setEditableBook(data));

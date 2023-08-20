@@ -3,10 +3,10 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 
 const initialBookState: BookStateType = {
-    isLoading: true,
     createModalOpened: false,
     deleteModalOpened: false,
     isEditable: false,
+    isLooking: false,
     editableBook: {
         id: undefined,
         title: '',
@@ -15,7 +15,6 @@ const initialBookState: BookStateType = {
         body: ''
     },
     deletableId: undefined,
-    allBooks: [],
 }
 
 const bookSlice = createSlice({
@@ -36,6 +35,9 @@ const bookSlice = createSlice({
                 body: '',
                 isPublished: false
             }
+        },
+        setLookingStatus(state, action: PayloadAction<boolean>) {
+            state.isLooking = action.payload;
         },
         setEditableBook(state, action: PayloadAction<BookItemType>) {
             state.editableBook = action.payload;

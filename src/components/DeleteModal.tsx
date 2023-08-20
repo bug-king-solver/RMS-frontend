@@ -7,7 +7,6 @@ const DeleteModal = ({ onClose }: ModalProps) => {
 
     const dispatch = useAppDispatch()
     const deletableId = useAppSelector(state => state.book.deletableId);
-    console.log(deletableId, typeof(deletableId))
     const [removeBookMutation] = useRemoveBook();
 
     const handleSubmit = () => {

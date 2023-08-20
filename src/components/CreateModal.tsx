@@ -1,17 +1,16 @@
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from 'zod'
-import { useAppDispatch, useAppSelector } from '../hooks/redux-hooks';
+import { useAppSelector } from '../hooks/redux-hooks';
 import { ModalProps } from '../types';
 import { useAddBook, useUpdateBook } from '../graphql-api';
 import { convertOutputItemType } from '../utils';
 
 const CreateModal = ({ onClose }: ModalProps) => {
 
-    const dispatch = useAppDispatch();
-
     const isEditable = useAppSelector(state => state.book.isEditable);
-    const editableData = useAppSelector(state => state.book.editableBook)
+    const isLooking = useAppSelector(state => state.book.isLooking);
+    const editableData = useAppSelector(state => state.book.editableBook);
     const [addNewBook] = useAddBook();
     const [updateBook] = useUpdateBook();
     const validationSchema = z.object({
@@ -64,7 +63,7 @@ const CreateModal = ({ onClose }: ModalProps) => {
                         <p>Title</p>
                     </div>
                     <div className='w-full'>
-                        <input type="text" id="title" className='w-full border-sold border-2 border-gray-400 rounded-lg p-2' {...register('title')}/>
+                        <input disabled={isLooking} type="text" id="title" className='w-full border-sold border-2 border-gray-400 rounded-lg p-2' {...register('title')}/>
                         {
                             errors.title && (
                                 <p className="text-start text-xs italic text-red-500 mt-2"> {errors.title?.message}</p>
@@ -77,7 +76,7 @@ const CreateModal = ({ onClose }: ModalProps) => {
                         <p>Published</p>
                     </div>
                     <div className='flex'>
-                        <input className='justify-start' type="checkbox" id="published" {...register('isPublished')} />
+                        <input disabled={isLooking} className='justify-start' type="checkbox" id="published" {...register('isPublished')} />
                     </div>
                 </div>
                 <div className='flex flex-wrap -mx-3 mb-6'>
@@ -85,7 +84,7 @@ const CreateModal = ({ onClose }: ModalProps) => {
                         <p>Description</p>
                     </div>
                     <div className='w-full'>
-                        <input type="text" id="desc" className='w-full border-sold border-2 border-gray-400 rounded-lg p-2' {...register('desc')} />
+                        <input disabled={isLooking} type="text" id="desc" className='w-full border-sold border-2 border-gray-400 rounded-lg p-2' {...register('desc')} />
                         {
                             errors.desc && (
                                 <p className="text-start text-xs italic text-red-500 mt-2"> {errors.desc?.message}</p>
@@ -98,7 +97,7 @@ const CreateModal = ({ onClose }: ModalProps) => {
                         <p>Body</p>
                     </div>
                     <div className='w-full'>
-                        <textarea id="body" cols={30} rows={10} className='w-full border-sold border-2 border-gray-400 rounded-lg p-2' {...register('body')} />
+                        <textarea disabled={isLooking} id="body" cols={30} rows={10} className='w-full border-sold border-2 border-gray-400 rounded-lg p-2' {...register('body')} />
                         {
                             errors.body && (
                                 <p className="text-start text-xs italic text-red-500 mt-2"> {errors.body?.message}</p>

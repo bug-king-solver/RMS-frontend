@@ -29,13 +29,12 @@ export interface GraphQLBooksType {
 }
 
 export interface BookStateType {
-    isLoading: boolean;
     createModalOpened: boolean;
     deleteModalOpened: boolean;
     isEditable: boolean;
+    isLooking: boolean;
     editableBook: BookItemType;
     deletableId: number | undefined;
-    allBooks: BookItemType[];
 }
 
 export interface UpdateBookItemType {
