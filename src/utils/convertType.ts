@@ -11,6 +11,7 @@ export const convertInputItemType = (origin: OriginBookItemType[]): BookItemType
 
 
 export const convertOutputItemType = (origin: BookItemType): OriginBookItemType => ({
+    id: origin.id,
     title: origin.title,
     body: origin.body,
     description: origin.desc,

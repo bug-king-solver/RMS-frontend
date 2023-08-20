@@ -16,7 +16,7 @@ const TableItem = ({ itemData }: BookItemPropsType) => {
 
     const handleDelete = () => {
         dispatch(deleteModalStatusChange(true));
-        dispatch(setDeletableTitle(itemData.title))
+        dispatch(setDeletableTitle(Number(itemData.id)))
     }
 
     return (

@@ -3,9 +3,8 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from 'zod'
 import { useAppDispatch, useAppSelector } from '../hooks/redux-hooks';
-import { updateBook } from '../store/book-actions';
 import { ModalProps } from '../types';
-import { useAddBook } from '../graphql-api';
+import { useAddBook, useUpdateBook } from '../graphql-api';
 import { convertOutputItemType } from '../utils';
 
 const CreateModal = ({ onClose }: ModalProps) => {
@@ -15,6 +14,7 @@ const CreateModal = ({ onClose }: ModalProps) => {
     const isEditable = useAppSelector(state => state.book.isEditable);
     const editableData = useAppSelector(state => state.book.editableBook)
     const [addNewBook] = useAddBook();
+    const [updateBook] = useUpdateBook();
     const validationSchema = z.object({
         title: z.string().min(3, {message: "Title is required"}),
         desc: z.string().min(3, {message: "Description is required"}),
@@ -36,7 +36,11 @@ const CreateModal = ({ onClose }: ModalProps) => {
 
     const onSubmit: SubmitHandler<ValidationSchema> = (data: ValidationSchema) => {
         if (isEditable) {
-            dispatch(updateBook(data));
+            const newBook = convertOutputItemType(data);
+            newBook.id = Number(editableData.id);
+            updateBook({variables: {
+                input: newBook
+            }})
         } else {
             const newBook = convertOutputItemType(data);
             addNewBook({variables: {

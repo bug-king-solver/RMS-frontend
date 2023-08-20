@@ -14,7 +14,7 @@ const initialBookState: BookStateType = {
         isPublished: false,
         body: ''
     },
-    deletableTitle: '',
+    deletableId: undefined,
     allBooks: [],
 }
 
@@ -47,7 +47,7 @@ const bookSlice = createSlice({
             state.allBooks = state.allBooks.map(book => book.id === state.editableBook.id ? data : book);
         },
         deleteBook(state) {
-            state.allBooks = state.allBooks.filter(book => book.title !== state.deletableTitle);
+            state.allBooks = state.allBooks.filter(book => book.id !== state.deletableId);
         },
         setEditableStatus(state, action: PayloadAction<boolean>) {
             state.isEditable = action.payload;
@@ -61,8 +61,8 @@ const bookSlice = createSlice({
         setEditableBook(state, action: PayloadAction<BookItemType>) {
             state.editableBook = action.payload;
         },
-        setDelectableBook(state, action: PayloadAction<string>) {
-            state.deletableTitle = action.payload;
+        setDelectableBook(state, action: PayloadAction<number>) {
+            state.deletableId = action.payload;
         }
     }
 })

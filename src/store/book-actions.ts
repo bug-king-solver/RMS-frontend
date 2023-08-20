@@ -59,8 +59,8 @@ export const setEditableData = (data: BookItemType): ThunkAction<void, RootState
     }
 }
 
-export const setDeletableTitle = (title: string): ThunkAction<void, RootState, unknown, AnyAction> => {
+export const setDeletableTitle = (id: number): ThunkAction<void, RootState, unknown, AnyAction> => {
     return async(dispatch, getState) => {
-        dispatch(bookActions.setDelectableBook(title));
+        dispatch(bookActions.setDelectableBook(id));
     }
 }

@@ -34,7 +34,7 @@ export interface BookStateType {
     deleteModalOpened: boolean;
     isEditable: boolean;
     editableBook: BookItemType;
-    deletableTitle: string;
+    deletableId: number | undefined;
     allBooks: BookItemType[];
 }
 
