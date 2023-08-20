@@ -33,7 +33,6 @@ const CreateModal = ({ onClose }: ModalProps) => {
     });
 
     const onSubmit: SubmitHandler<ValidationSchema> = (data: ValidationSchema) => {
-        console.log("data", data)
         if (isEditable) {
             dispatch(updateBook(data));
         } else {

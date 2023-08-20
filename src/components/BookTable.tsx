@@ -1,20 +1,11 @@
 import TableItem from "./TableItem";
-import { useAppDispatch, useAppSelector } from "../hooks/redux-hooks";
-import { useEffect } from "react";
-import { fetchBooks } from "../store/book-actions";
 import Spinner from "./Spinner";
+import {useGetAllBooks} from '../graphql-api'
+import { GraphQLBooksType } from "../types";
 
 const BookTable = () => {
-    
-    const dispatch=useAppDispatch();
-    
-    const allBooks = useAppSelector(state => state.book.allBooks);
-    const isLoading = useAppSelector(state => state.book.isLoading);
-    
-    useEffect(() => {
-        dispatch(fetchBooks())
-    }, [dispatch])
-
+    const {books, loading, error}: GraphQLBooksType = useGetAllBooks()
+    const isLoading = loading;
     return (
         <div className="overflow-hidden rounded-lg border border-gray-200 shadow-md m-5">
             {
@@ -31,8 +22,8 @@ const BookTable = () => {
                     </thead> 
                     <tbody className="divide-y divide-gray-100 border-t border-gray-100">
                         {
-                            allBooks.map((data, index) => <TableItem itemData={data} key={index} />)
-                        }    
+                            books.map((data) => <TableItem itemData={data} key={data.id} />)
+                        }
                     </tbody>
                 </table>
             }

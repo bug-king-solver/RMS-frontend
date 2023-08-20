@@ -24,14 +24,14 @@ export const fetchBooks = ():ThunkAction<void, RootState, unknown, AnyAction> =>
         if (getState().book.allBooks.length === 0) {
             const response: BookItemType[] = await BookService.getAllBooks();
             dispatch(bookActions.setBooks(response));
-            dispatch(bookActions.setIsLoding(false));
         }
     }
 }
 
 export const addBook = (data: BookItemType): ThunkAction<void, RootState, unknown, AnyAction> => {
     return async(dispatch, getState) => {
-        dispatch(bookActions.addBook(data));
+        await BookService.addBook(data);
+        // dispatch(bookActions.addBook(data));
     }
 }
 

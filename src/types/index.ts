@@ -1,10 +1,32 @@
+import { ApolloError } from "@apollo/client";
+
+export interface OriginBookItemType {
+    id?: number;
+    title: string;
+    description: string;
+    body: string,
+    published: boolean,
+}
+
 export interface BookItemType {
-    id?: number | undefined;
+    id?: number;
     title: string;
     desc: string;
     body: string;
-    isPublished: boolean | undefined;
+    isPublished: boolean;
 };
+
+export interface GraphQLBookType {
+    data: BookItemType;
+    loading: boolean;
+    error: ApolloError | undefined;
+}
+
+export interface GraphQLBooksType {
+    books: BookItemType[];
+    loading: boolean;
+    error: ApolloError | undefined;
+}
 
 export interface BookStateType {
     isLoading: boolean;

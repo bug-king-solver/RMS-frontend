@@ -1,6 +1,7 @@
 import { useAppDispatch } from "../hooks/redux-hooks";
 import { deleteModalStatusChange, editableStatusChange, modalStatausChange, setDeletableTitle, setEditableData } from "../store/book-actions";
 import { BookItemPropsType } from "../types";
+import { truncateText } from "../utils/truncateText";
 
 const TableItem = ({ itemData }: BookItemPropsType) => {
 
@@ -10,6 +11,7 @@ const TableItem = ({ itemData }: BookItemPropsType) => {
         dispatch(modalStatausChange(true));
         dispatch(editableStatusChange(true));
         dispatch(setEditableData(itemData));
+        console.log(itemData)
     }
 
     const handleDelete = () => {
@@ -36,11 +38,11 @@ const TableItem = ({ itemData }: BookItemPropsType) => {
                 </span>}
             </td>
             <td className="px-6 py-4">
-                <span> {itemData.desc} </span> 
+                <span> { truncateText(itemData.desc) } </span> 
             </td>
             <td className="px-6 py-4">
                 <span>
-                    {itemData.body}
+                    { truncateText(itemData.body, 40) }
                 </span>
             </td>
             <td className="px-6 py-4">
