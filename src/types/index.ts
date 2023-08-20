@@ -1,5 +1,3 @@
-import { ApolloError } from "@apollo/client";
-
 export interface OriginBookItemType {
     id?: number;
     title: string;
@@ -16,12 +14,6 @@ export interface BookItemType {
     isPublished: boolean;
 };
 
-export interface GraphQLBookType {
-    data: BookItemType;
-    loading: boolean;
-    error: ApolloError | undefined;
-}
-
 export interface BookStateType {
     createModalOpened: boolean;
     deleteModalOpened: boolean;
@@ -31,10 +23,6 @@ export interface BookStateType {
     deletableId: number | undefined;
 }
 
-export interface UpdateBookItemType {
-    id: number;
-    data: BookItemType;
-};
 
 export interface BookItemPropsType {
     item: BookItemType;
