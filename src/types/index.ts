@@ -1,11 +1,22 @@
-export interface tableItemType {
-    id: number;
+export interface BookItemType {
     title: string;
-    published: boolean;
     desc: string;
-    body: string
+    body: string;
+    isPublished: boolean | null;
 };
 
-export interface tableItemPropsType {
-    tableData: tableItemType;
+export interface BookStateType {
+    isLoading: boolean;
+    isEditable: boolean;
+    editableBook: BookItemType;
+    allBooks: BookItemType[];
+}
+
+export interface UpdateBookItemType {
+    id: number;
+    data: BookItemType;
+};
+
+export interface BookItemPropsType {
+    tableData: BookItemType;
 };
