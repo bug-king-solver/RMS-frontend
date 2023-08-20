@@ -1,13 +1,13 @@
-import { tableItemPropsType } from "../types";
+import { BookItemPropsType } from "../types";
 
-const TableItem = ({ tableData }: tableItemPropsType) => {
+const TableItem = ({ tableData }: BookItemPropsType) => {
     return (
         <tr className="hover:bg-gray-50">
             <th className="flex gap-3 px-6 py-4 font-normal text-gray-900">
                 <span> { tableData.title } </span>
             </th>
             <td className="px-6 py-4">
-                {tableData.published ? <span
+                {tableData.isPublished ? <span
                     className="inline-flex items-center gap-1 rounded-full bg-green-50 px-2 py-1 text-xs font-semibold text-green-600"
                 >
                     <span className="h-1.5 w-1.5 rounded-full bg-green-600"></span>
@@ -29,7 +29,7 @@ const TableItem = ({ tableData }: tableItemPropsType) => {
             </td>
             <td className="px-6 py-4">
                 <div className="flex justify-start gap-4">
-                    <a x-data="{ tooltip: 'Delete' }" href="#">
+                    <a x-data="{ tooltip: 'Delete' }" className="rounded-lg hover:bg-red-100" href="#">
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"
@@ -46,7 +46,7 @@ const TableItem = ({ tableData }: tableItemPropsType) => {
                         />
                     </svg>
                     </a>
-                    <a x-data="{ tooltip: 'Edite' }" href="#">
+                    <a x-data="{ tooltip: 'Edite' }" className="rounded-lg hover:bg-green-100" href="#">
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"
