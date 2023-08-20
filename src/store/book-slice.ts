@@ -10,7 +10,7 @@ const initialBookState: BookStateType = {
     editableBook: {
         title: '',
         desc: '',
-        isPublished: null,
+        isPublished: undefined,
         body: ''
     },
     deletableTitle: '',

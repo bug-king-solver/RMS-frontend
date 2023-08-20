@@ -23,6 +23,12 @@ const CreateModal = ({ onClose }: ModalProps) => {
     type ValidationSchema = z.infer<typeof validationSchema>;
     
     const { register, handleSubmit, formState: {errors}} = useForm<ValidationSchema>({
+        defaultValues: {
+            title: editableData.title,
+            isPublished: editableData.isPublished,
+            desc: editableData.desc,
+            body: editableData.body
+        },
         resolver: zodResolver(validationSchema),
     });
 
@@ -46,7 +52,7 @@ const CreateModal = ({ onClose }: ModalProps) => {
                         <p>Title</p>
                     </div>
                     <div className='w-full'>
-                        <input value={isEditable ? editableData.title : ''} type="text" id="title" className='w-full border-sold border-2 border-gray-400 rounded-lg p-2' {...register('title')}/>
+                        <input type="text" id="title" className='w-full border-sold border-2 border-gray-400 rounded-lg p-2' {...register('title')}/>
                         {
                             errors.title && (
                                 <p className="text-start text-xs italic text-red-500 mt-2"> {errors.title?.message}</p>
@@ -67,7 +73,7 @@ const CreateModal = ({ onClose }: ModalProps) => {
                         <p>Description</p>
                     </div>
                     <div className='w-full'>
-                        <input value={isEditable ? editableData.desc : ''} type="text" id="desc" className='w-full border-sold border-2 border-gray-400 rounded-lg p-2' {...register('desc')} />
+                        <input type="text" id="desc" className='w-full border-sold border-2 border-gray-400 rounded-lg p-2' {...register('desc')} />
                         {
                             errors.desc && (
                                 <p className="text-start text-xs italic text-red-500 mt-2"> {errors.desc?.message}</p>
@@ -80,7 +86,7 @@ const CreateModal = ({ onClose }: ModalProps) => {
                         <p>Body</p>
                     </div>
                     <div className='w-full'>
-                        <textarea value={isEditable ? editableData.body : ''} id="body" cols={30} rows={10} className='w-full border-sold border-2 border-gray-400 rounded-lg p-2' {...register('body')} />
+                        <textarea id="body" cols={30} rows={10} className='w-full border-sold border-2 border-gray-400 rounded-lg p-2' {...register('body')} />
                         {
                             errors.body && (
                                 <p className="text-start text-xs italic text-red-500 mt-2"> {errors.body?.message}</p>

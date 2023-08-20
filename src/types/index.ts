@@ -2,7 +2,7 @@ export interface BookItemType {
     title: string;
     desc: string;
     body: string;
-    isPublished: boolean | null;
+    isPublished: boolean | undefined;
 };
 
 export interface BookStateType {
