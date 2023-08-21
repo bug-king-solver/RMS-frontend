@@ -51,8 +51,8 @@ const CreateModal = ({ onClose }: ModalProps) => {
     return (
         <div className="fixed inset-0 flex items-center justify-center z-50">
         <div className="fixed inset-0 bg-black opacity-50"></div>
-        <div className="bg-white p-4 rounded-lg shadow-lg relative">
-            <form className="block max-w-md rounded-lg bg-white p-6" onSubmit={handleSubmit(onSubmit)}>
+        <div className="bg-white p-4 rounded-lg shadow-lg relative md:max-w-md">
+            <form className="block rounded-lg bg-white p-6" onSubmit={handleSubmit(onSubmit)}>
                 <div className='mb-10'>
                     <p className='font-mono text-xl text-center'>
                         Add New Book
@@ -105,10 +105,15 @@ const CreateModal = ({ onClose }: ModalProps) => {
                         }
                     </div>
                 </div>
-                <div className='flex justify-between space-x-5 mb-5'>
-                    <button type='submit' className='rounded-lg border-solid border-2 border-gray-300 p-2 mr-5 md:w-40 hover:border-gray-500'>{ isEditable ? 'Update' : 'Submit'}</button>
-                    <button className='rounded-lg border-solid border-2 border-gray-300 p-2 mr-5 md:w-40 hover:border-gray-500' onClick={onClose}>Cancel</button>
-                </div>
+                    {
+                        !isLooking ? <>
+                            <div className='flex flex-col md:flex-row md:justify-between'>
+                                <button type='submit' className='rounded-lg border-solid border-2 border-gray-300 p-2 md:w-40 hover:border-gray-500'>{ isEditable ? 'Update' : 'Submit'}</button>
+                                <button className='rounded-lg border-solid border-2 border-gray-300 p-2 md:w-40 hover:border-gray-500' onClick={onClose}>Cancel</button>
+                            </div>
+                        </> :
+                        <button className="rounded-lg border-solid border-2 border-gray-300 p-2 md:w-40 hover:border-gray-500" onClick={onClose}>Close</button>
+                    }
             </form>
         </div>
         </div>

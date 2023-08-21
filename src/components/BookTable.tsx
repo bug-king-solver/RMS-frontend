@@ -3,6 +3,7 @@ import Spinner from "./Spinner";
 import {useGetAllBooks} from '../graphql-api'
 import { createModalStatausChange } from "../store/book-actions";
 import { useAppDispatch } from "../hooks/redux-hooks";
+import { BookItemType } from "../types";
 
 const BookTable = () => {
     const {books, loading, error} = useGetAllBooks()
@@ -19,7 +20,7 @@ const BookTable = () => {
                 New
             </button>
             </div>
-            <div className="overflow-hidden rounded-lg border border-gray-200 shadow-md m-5">
+            <div className="relative overflow-x-auto rounded-lg border border-gray-200 shadow-md m-5">
                 {
                     <table className="w-full border-collapse bg-white text-left text-sm text-gray-500">
                         <thead className="bg-gray-50">
