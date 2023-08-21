@@ -50,72 +50,72 @@ const CreateModal = ({ onClose }: ModalProps) => {
 
     return (
         <div className="fixed inset-0 flex items-center justify-center z-50">
-        <div className="fixed inset-0 bg-black opacity-50"></div>
-        <div className="bg-white p-4 rounded-lg shadow-lg relative md:max-w-md">
-            <form className="block rounded-lg bg-white p-6" onSubmit={handleSubmit(onSubmit)}>
-                <div className='mb-10'>
-                    <p className='font-mono text-xl text-center'>
-                        Add New Book
-                    </p>
-                </div>
-                <div className='flex flex-wrap -mx-3 mb-6'>
-                    <div className='mb-3'>
-                        <p>Title</p>
+            <div className="absolute inset-0 bg-black opacity-50"></div>
+            <div className="bg-white p-4 rounded-lg shadow-lg relative md:max-w-md overflow-auto max-h-[100%]">
+                <form className="block rounded-lg bg-white p-6" onSubmit={handleSubmit(onSubmit)}>
+                    <div className='mb-10'>
+                        <p className='font-mono text-xl text-center'>
+                            Add New Book
+                        </p>
                     </div>
-                    <div className='w-full'>
-                        <input disabled={isLooking} type="text" id="title" className='w-full border-sold border-2 border-gray-400 rounded-lg p-2' {...register('title')}/>
+                    <div className='flex flex-wrap -mx-3 mb-6'>
+                        <div className='mb-3'>
+                            <p>Title</p>
+                        </div>
+                        <div className='w-full'>
+                            <input disabled={isLooking} type="text" id="title" className='w-full border-sold border-2 border-gray-400 rounded-lg p-2' {...register('title')}/>
+                            {
+                                errors.title && (
+                                    <p className="text-start text-xs italic text-red-500 mt-2"> {errors.title?.message}</p>
+                                )
+                            }
+                        </div>
+                    </div>
+                    <div className='flex flex-wrap -mx-3 mb-6'>
+                        <div className='mr-3'>
+                            <p>Published</p>
+                        </div>
+                        <div className='flex'>
+                            <input disabled={isLooking} className='justify-start' type="checkbox" id="published" {...register('isPublished')} />
+                        </div>
+                    </div>
+                    <div className='flex flex-wrap -mx-3 mb-6'>
+                        <div className='mb-3'>
+                            <p>Description</p>
+                        </div>
+                        <div className='w-full'>
+                            <input disabled={isLooking} type="text" id="desc" className='w-full border-sold border-2 border-gray-400 rounded-lg p-2' {...register('desc')} />
+                            {
+                                errors.desc && (
+                                    <p className="text-start text-xs italic text-red-500 mt-2"> {errors.desc?.message}</p>
+                                )
+                            }
+                        </div>
+                    </div>
+                    <div className='flex flex-wrap -mx-3 mb-6'>
+                        <div className='mb-3'>
+                            <p>Body</p>
+                        </div>
+                        <div className='w-full'>
+                            <textarea disabled={isLooking} id="body" cols={30} rows={10} className='w-full border-sold border-2 border-gray-400 rounded-lg p-2' {...register('body')} />
+                            {
+                                errors.body && (
+                                    <p className="text-start text-xs italic text-red-500 mt-2"> {errors.body?.message}</p>
+                                )
+                            }
+                        </div>
+                    </div>
                         {
-                            errors.title && (
-                                <p className="text-start text-xs italic text-red-500 mt-2"> {errors.title?.message}</p>
-                            )
+                            !isLooking ? <>
+                                <div className='flex flex-col md:flex-row md:justify-between'>
+                                    <button type='submit' className='border-2 border-gray-300 border-solid hover:border-gray-500 md:w-40 p-2 rounded-lg mb-2 md:mb-0 md:mr-2'>{ isEditable ? 'Update' : 'Submit'}</button>
+                                    <button className='rounded-lg border-solid border-2 border-gray-300 p-2 md:w-40 hover:border-gray-500 mt-2 md:mt-0' onClick={onClose}>Cancel</button>
+                                </div>
+                            </> :
+                            <button className="rounded-lg border-solid border-2 border-gray-300 p-2 md:w-40 hover:border-gray-500" onClick={onClose}>Close</button>
                         }
-                    </div>
-                </div>
-                <div className='flex flex-wrap -mx-3 mb-6'>
-                    <div className='mr-3'>
-                        <p>Published</p>
-                    </div>
-                    <div className='flex'>
-                        <input disabled={isLooking} className='justify-start' type="checkbox" id="published" {...register('isPublished')} />
-                    </div>
-                </div>
-                <div className='flex flex-wrap -mx-3 mb-6'>
-                    <div className='mb-3'>
-                        <p>Description</p>
-                    </div>
-                    <div className='w-full'>
-                        <input disabled={isLooking} type="text" id="desc" className='w-full border-sold border-2 border-gray-400 rounded-lg p-2' {...register('desc')} />
-                        {
-                            errors.desc && (
-                                <p className="text-start text-xs italic text-red-500 mt-2"> {errors.desc?.message}</p>
-                            )
-                        }
-                    </div>
-                </div>
-                <div className='flex flex-wrap -mx-3 mb-6'>
-                    <div className='mb-3'>
-                        <p>Body</p>
-                    </div>
-                    <div className='w-full'>
-                        <textarea disabled={isLooking} id="body" cols={30} rows={10} className='w-full border-sold border-2 border-gray-400 rounded-lg p-2' {...register('body')} />
-                        {
-                            errors.body && (
-                                <p className="text-start text-xs italic text-red-500 mt-2"> {errors.body?.message}</p>
-                            )
-                        }
-                    </div>
-                </div>
-                    {
-                        !isLooking ? <>
-                            <div className='flex flex-col md:flex-row md:justify-between'>
-                                <button type='submit' className='rounded-lg border-solid border-2 border-gray-300 p-2 md:w-40 hover:border-gray-500'>{ isEditable ? 'Update' : 'Submit'}</button>
-                                <button className='rounded-lg border-solid border-2 border-gray-300 p-2 md:w-40 hover:border-gray-500' onClick={onClose}>Cancel</button>
-                            </div>
-                        </> :
-                        <button className="rounded-lg border-solid border-2 border-gray-300 p-2 md:w-40 hover:border-gray-500" onClick={onClose}>Close</button>
-                    }
-            </form>
-        </div>
+                </form>
+            </div>
         </div>
     );
 };
