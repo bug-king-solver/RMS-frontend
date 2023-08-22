@@ -6,7 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import store from './store';
 import { Provider } from 'react-redux';
 import { ApolloProvider } from '@apollo/client';
-import client from './graphql/apollo';
+import client from './graphql';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement

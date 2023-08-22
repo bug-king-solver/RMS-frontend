@@ -1,7 +1,7 @@
-import { useRemoveBook } from "../graphql-api";
-import { useAppDispatch, useAppSelector } from "../hooks/redux-hooks";
-import { deleteModalStatusChange } from "../store/book-actions";
-import { ModalProps } from "../types";
+import { useRemoveBook } from "../../graphql/api";
+import { useAppDispatch, useAppSelector } from "../../hooks/redux-hooks";
+import { deleteModalStatusChange } from "../../store/book-actions";
+import { ModalProps } from "../../types";
 
 const DeleteModal = ({ onClose }: ModalProps) => {
 

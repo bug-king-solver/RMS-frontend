@@ -1,6 +1,6 @@
 import { gql } from '@apollo/client';
 
-export const ADD_New_BOOK_MUTATION = gql`
+export const ADD_NEW_BOOK_MUTATION = gql`
     mutation AddNewBook($input: CreateBookInput!) {
         createBook(createBookInput: $input) {
             id
@@ -35,3 +35,6 @@ export const REMOVE_BOOK_MUTATION = gql`
         }
     }
 `;
+
+
+export * from './mutations';

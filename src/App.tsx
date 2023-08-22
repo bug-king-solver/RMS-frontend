@@ -1,7 +1,7 @@
-import BookTable from './components/BookTable';
+import BookTable from './components/booktable';
 import './App.css';
-import CreateModal from './components/CreateModal';
-import DeleteModal from './components/DeleteModal';
+import { CreateModal } from './components/modal';
+import { DeleteModal } from './components/modal';
 import { useAppDispatch, useAppSelector } from './hooks/redux-hooks';
 import { editableStatusChange, createModalStatausChange, deleteModalStatusChange, lookingStatusChange } from './store/book-actions';
 

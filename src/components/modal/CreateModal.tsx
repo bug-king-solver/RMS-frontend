@@ -1,10 +1,10 @@
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from 'zod'
-import { useAppSelector } from '../hooks/redux-hooks';
-import { ModalProps } from '../types';
-import { useAddBook, useUpdateBook } from '../graphql-api';
-import { convertOutputItemType } from '../utils';
+import { useAppSelector } from '../../hooks/redux-hooks';
+import { ModalProps } from '../../types';
+import { useAddBook, useUpdateBook } from '../../graphql';
+import { convertOutputItemType } from '../../utils';
 
 const CreateModal = ({ onClose }: ModalProps) => {
 

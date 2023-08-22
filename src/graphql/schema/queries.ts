@@ -12,3 +12,4 @@ export const GET_All_BOOKS = gql`
   }
 `;
 
+export * from './queries';

@@ -1,9 +1,8 @@
 import TableItem from "./TableItem";
-import Spinner from "./Spinner";
-import {useGetAllBooks} from '../graphql-api'
-import { createModalStatausChange } from "../store/book-actions";
-import { useAppDispatch } from "../hooks/redux-hooks";
-import { BookItemType } from "../types";
+import Spinner from "../common/Spinner";
+import {useGetAllBooks} from '../../graphql/api'
+import { createModalStatausChange } from "../../store/book-actions";
+import { useAppDispatch } from "../../hooks/redux-hooks";
 
 const BookTable = () => {
     const {books, loading, error} = useGetAllBooks()

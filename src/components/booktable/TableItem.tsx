@@ -1,7 +1,7 @@
-import { useAppDispatch } from "../hooks/redux-hooks";
-import { deleteModalStatusChange, editableStatusChange, createModalStatausChange, setDeletableId, setEditableData, lookingStatusChange } from "../store/book-actions";
-import { BookItemPropsType } from "../types";
-import { truncateText } from "../utils/truncateText";
+import { useAppDispatch } from "../../hooks/redux-hooks";
+import { deleteModalStatusChange, editableStatusChange, createModalStatausChange, setDeletableId, setEditableData, lookingStatusChange } from "../../store/book-actions";
+import { BookItemPropsType } from "../../types";
+import { truncateText } from "../../utils/truncateText";
 
 const TableItem = ({ item }: BookItemPropsType) => {
 

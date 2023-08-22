@@ -1,7 +1,6 @@
 import { useQuery,useMutation } from "@apollo/client";
-import { GET_All_BOOKS } from "../graphql/queries";
-import { convertInputItemType } from "../utils";
-import { ADD_New_BOOK_MUTATION, REMOVE_BOOK_MUTATION, UPDATE_BOOK_MUTATION } from "../graphql/mutations";
+import { convertInputItemType } from "../../utils";
+import { GET_All_BOOKS, ADD_NEW_BOOK_MUTATION, REMOVE_BOOK_MUTATION, UPDATE_BOOK_MUTATION } from "../schema";
 
 export const useGetAllBooks = () => {
     const {data, loading, error} =  useQuery(GET_All_BOOKS);
@@ -10,7 +9,7 @@ export const useGetAllBooks = () => {
 }
 
 export const useAddBook = () => {
-    const [addNewBook] = useMutation(ADD_New_BOOK_MUTATION, {
+    const [addNewBook] = useMutation(ADD_NEW_BOOK_MUTATION, {
         refetchQueries: [{query: GET_All_BOOKS}]
     });
     return [addNewBook];
