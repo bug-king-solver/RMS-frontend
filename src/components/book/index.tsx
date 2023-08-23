@@ -1,21 +1,33 @@
 import TableItem from "./TableItem";
-import Spinner from "../common/Spinner";
+import {Spinner} from "../common";
 import {useGetAllBooks} from '../../graphql/api'
-import { createModalStatausChange } from "../../store/book-actions";
+import { changeBookModalStatus } from "../../store/book-actions";
 import { useAppDispatch } from "../../hooks/redux-hooks";
+import { BookItemType, BookModalStatusType, ModalStatus } from "../../constant";
 
 const BookTable = () => {
     const {books, loading, error} = useGetAllBooks()
     const dispatch = useAppDispatch();
     if (loading) return <Spinner />
     if (error) return <p>{error.message}</p>;
-    const openModal = () => {
-        dispatch(createModalStatausChange(true));
-      };
+    const handleAddBook = () => {
+        const configData: BookItemType = {
+            title: '',
+            description: '',
+            body: '',
+            published: false,
+        }
+        const modalStatus: BookModalStatusType = {
+            status: ModalStatus.CREATE, 
+            data: configData
+        }
+        dispatch(changeBookModalStatus(modalStatus))
+    };
+
     return (
         <>
             <div className='flex justify-end'>
-            <button className="rounded-lg border-solid border-2 border-gray-300 p-2 mr-5 md:w-40 hover:border-gray-500" onClick={openModal}>
+            <button className="rounded-lg border-solid border-2 border-gray-300 p-2 mr-5 md:w-40 hover:border-gray-500" onClick={handleAddBook}>
                 New
             </button>
             </div>
@@ -33,7 +45,7 @@ const BookTable = () => {
                         </thead> 
                         <tbody className="divide-y divide-gray-100 border-t border-gray-100">
                             {
-                                books.map((data) => <TableItem item={data} key={data.id} />)
+                                books.map((data: BookItemType) => <TableItem item={data} key={data.id} />)
                             }
                         </tbody>
                     </table>

@@ -1,19 +1,15 @@
 import { useRemoveBook } from "../../graphql/api";
-import { useAppDispatch, useAppSelector } from "../../hooks/redux-hooks";
-import { deleteModalStatusChange } from "../../store/book-actions";
-import { ModalProps } from "../../types";
+import { useAppSelector } from "../../hooks/redux-hooks";
+import { ModalProps } from "../../constant";
 
 const DeleteModal = ({ onClose }: ModalProps) => {
-
-    const dispatch = useAppDispatch()
-    const deletableId = useAppSelector(state => state.book.deletableId);
+    const deletableId = useAppSelector(state => state.book.bookState.id);
     const [removeBookMutation] = useRemoveBook();
 
     const handleSubmit = () => {
         removeBookMutation({variables: {
             input: Number(deletableId)
         }})
-        dispatch(deleteModalStatusChange(false));
     }
 
     return (

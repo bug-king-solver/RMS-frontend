@@ -2,21 +2,19 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from 'zod'
 import { useAppSelector } from '../../hooks/redux-hooks';
-import { ModalProps } from '../../types';
+import { ModalProps } from '../../constant/types';
 import { useAddBook, useUpdateBook } from '../../graphql';
-import { convertOutputItemType } from '../../utils';
 
 const CreateModal = ({ onClose }: ModalProps) => {
 
-    const isEditable = useAppSelector(state => state.book.isEditable);
-    const isLooking = useAppSelector(state => state.book.isLooking);
-    const editableData = useAppSelector(state => state.book.editableBook);
+    const modalStatus = useAppSelector(state => state.book.bookModalStatus);
+    const editableData = useAppSelector(state => state.book.bookState);
     const [addNewBook] = useAddBook();
     const [updateBook] = useUpdateBook();
     const validationSchema = z.object({
         title: z.string().min(3, {message: "Title is required"}),
-        desc: z.string().min(3, {message: "Description is required"}),
-        isPublished: z.boolean(),
+        description: z.string().min(3, {message: "Description is required"}),
+        published: z.boolean(),
         body: z.string().min(3, {message: 'Body is required'})
     });
 
@@ -25,24 +23,25 @@ const CreateModal = ({ onClose }: ModalProps) => {
     const { register, handleSubmit, formState: {errors}} = useForm<ValidationSchema>({
         defaultValues: {
             title: editableData.title,
-            isPublished: editableData.isPublished,
-            desc: editableData.desc,
+            published: editableData.published,
+            description: editableData.description,
             body: editableData.body
         },
         resolver: zodResolver(validationSchema),
     });
 
     const onSubmit: SubmitHandler<ValidationSchema> = (data: ValidationSchema) => {
-        if (isEditable) {
-            const newBook = convertOutputItemType(data);
-            newBook.id = Number(editableData.id);
+        if (modalStatus === 'edit') {
+            const newBook = {
+                id: Number(editableData.id),
+                ...data,
+            };
             updateBook({variables: {
                 input: newBook
             }})
         } else {
-            const newBook = convertOutputItemType(data);
             addNewBook({variables: {
-                input: newBook
+                input: data
             }});
         }
         onClose();
@@ -63,7 +62,7 @@ const CreateModal = ({ onClose }: ModalProps) => {
                             <p>Title</p>
                         </div>
                         <div className='w-full'>
-                            <input disabled={isLooking} type="text" id="title" className='w-full border-sold border-2 border-gray-400 rounded-lg p-2' {...register('title')}/>
+                            <input disabled={modalStatus === 'process'} type="text" id="title" className='w-full border-sold border-2 border-gray-400 rounded-lg p-2' {...register('title')}/>
                             {
                                 errors.title && (
                                     <p className="text-start text-xs italic text-red-500 mt-2"> {errors.title?.message}</p>
@@ -76,7 +75,7 @@ const CreateModal = ({ onClose }: ModalProps) => {
                             <p>Published</p>
                         </div>
                         <div className='flex'>
-                            <input disabled={isLooking} className='justify-start' type="checkbox" id="published" {...register('isPublished')} />
+                            <input disabled={modalStatus === 'process'} className='justify-start' type="checkbox" id="published" {...register('published')} />
                         </div>
                     </div>
                     <div className='flex flex-wrap -mx-3 mb-6'>
@@ -84,10 +83,10 @@ const CreateModal = ({ onClose }: ModalProps) => {
                             <p>Description</p>
                         </div>
                         <div className='w-full'>
-                            <input disabled={isLooking} type="text" id="desc" className='w-full border-sold border-2 border-gray-400 rounded-lg p-2' {...register('desc')} />
+                            <input disabled={modalStatus === 'process'} type="text" id="description" className='w-full border-sold border-2 border-gray-400 rounded-lg p-2' {...register('description')} />
                             {
-                                errors.desc && (
-                                    <p className="text-start text-xs italic text-red-500 mt-2"> {errors.desc?.message}</p>
+                                errors.description && (
+                                    <p className="text-start text-xs italic text-red-500 mt-2"> {errors.description?.message}</p>
                                 )
                             }
                         </div>
@@ -97,7 +96,7 @@ const CreateModal = ({ onClose }: ModalProps) => {
                             <p>Body</p>
                         </div>
                         <div className='w-full'>
-                            <textarea disabled={isLooking} id="body" cols={30} rows={10} className='w-full border-sold border-2 border-gray-400 rounded-lg p-2' {...register('body')} />
+                            <textarea disabled={modalStatus === 'process'} id="body" cols={30} rows={10} className='w-full border-sold border-2 border-gray-400 rounded-lg p-2' {...register('body')} />
                             {
                                 errors.body && (
                                     <p className="text-start text-xs italic text-red-500 mt-2"> {errors.body?.message}</p>
@@ -106,9 +105,9 @@ const CreateModal = ({ onClose }: ModalProps) => {
                         </div>
                     </div>
                         {
-                            !isLooking ? <>
+                            modalStatus === 'create' || modalStatus === 'edit' ? <>
                                 <div className='flex flex-col md:flex-row md:justify-between'>
-                                    <button type='submit' className='border-2 border-gray-300 border-solid hover:border-gray-500 md:w-40 p-2 rounded-lg mb-2 md:mb-0 md:mr-2'>{ isEditable ? 'Update' : 'Submit'}</button>
+                                    <button type='submit' className='border-2 border-gray-300 border-solid hover:border-gray-500 md:w-40 p-2 rounded-lg mb-2 md:mb-0 md:mr-2'>{ modalStatus === 'edit' ? 'Update' : 'Submit'}</button>
                                     <button className='rounded-lg border-solid border-2 border-gray-300 p-2 md:w-40 hover:border-gray-500 mt-2 md:mt-0' onClick={onClose}>Cancel</button>
                                 </div>
                             </> :

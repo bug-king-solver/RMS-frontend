@@ -1,7 +1,2 @@
-import CreateModal from "./CreateModal";
-import DeleteModal from "./DeleteModal";
-
-export  {
-    CreateModal,
-    DeleteModal
-}
+export { default as CreateModal } from './BookModal';
+export { default as DeleteModal } from './DeleteModal'
