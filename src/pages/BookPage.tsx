@@ -1,5 +1,5 @@
 import BookTable from "../components/book";
-import { CreateModal, DeleteModal } from "../components/modal";
+import { CreateModal, DeleteModal } from "../components/modals";
 import {BookItemType, BookModalStatusType, ModalStatus} from "../constant";
 import { useAppDispatch, useAppSelector } from "../hooks/redux-hooks";
 import { changeBookModalStatus } from "../store/book-actions";
