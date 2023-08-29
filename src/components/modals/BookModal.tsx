@@ -4,13 +4,14 @@ import { z } from 'zod'
 import { useAppSelector } from '../../hooks/redux-hooks';
 import { ModalProps } from '../../constant/types';
 import { useAddBook, useUpdateBook } from '../../graphql';
-import { Spinner } from '../common';
 
 const CreateModal = ({ onClose }: ModalProps) => {
 
     const modalStatus = useAppSelector(state => state.book.bookModalStatus);
     const editableData = useAppSelector(state => state.book.bookState);
     
+    const [addNewBook] = useAddBook();
+    const [updateBook] = useUpdateBook();
     const validationSchema = z.object({
         title: z.string().min(3, {message: "Title is required"}),
         description: z.string().min(3, {message: "Description is required"}),
@@ -29,12 +30,6 @@ const CreateModal = ({ onClose }: ModalProps) => {
         },
         resolver: zodResolver(validationSchema),
     });
-    const {addNewBook,  loading : addLoading, error: addError} = useAddBook();
-    const {updateBook, loading: updateLoading, error: updateError} = useUpdateBook();
-    if (updateLoading || addLoading) return <Spinner />;
-    if (updateError || addError) {
-        return <p>{ updateError?.message || addError?.message }</p>
-    }
     const onSubmit: SubmitHandler<ValidationSchema> = (data: ValidationSchema) => {
         if (modalStatus === 'edit') {
             const newBook = {
