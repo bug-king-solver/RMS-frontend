@@ -36,9 +36,9 @@ const TableItem = ({ item }: BookItemPropsType) => {
 
     return (
         <tr className="hover:bg-gray-50">
-            <th className="flex gap-3 px-6 py-4 font-normal text-gray-900">
-                <span> { item.title } </span>
-            </th>
+            <td className="px-6 py-4">
+                <span> { item.title } </span> 
+            </td>
             <td className="px-6 py-4">
                 {item.published ? <span
                     className="inline-flex items-center gap-1 rounded-full bg-green-50 px-2 py-1 text-xs font-semibold text-green-600"
