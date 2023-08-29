@@ -3,28 +3,28 @@ import { GET_All_BOOKS, ADD_NEW_BOOK_MUTATION, REMOVE_BOOK_MUTATION, UPDATE_BOOK
 
 export const useGetAllBooks = () => {
     const {data, loading, error} =  useQuery(GET_All_BOOKS);
-    console.log(loading)
     const books = data ? data.findAll : []; 
     return {books, loading, error}
 }
 
 export const useAddBook = () => {
-    const [addNewBook] = useMutation(ADD_NEW_BOOK_MUTATION, {
-        refetchQueries: [{query: GET_All_BOOKS}]
+    const [addNewBook, {loading}] = useMutation(ADD_NEW_BOOK_MUTATION, {
+        refetchQueries: [{query: GET_All_BOOKS}],
+        awaitRefetchQueries: true,
     });
-    return [addNewBook];
+    return {addNewBook, loading};
 }
 
 export const useUpdateBook = () => {
-    const [updateBook] = useMutation(UPDATE_BOOK_MUTATION, {
+    const [updateBook, {loading}] = useMutation(UPDATE_BOOK_MUTATION, {
         refetchQueries: [{query: GET_All_BOOKS}]
     });
-    return [updateBook];
+    return {updateBook, loading};
 }
 
 export const useRemoveBook = () => {
-    const [removeBookMutation] = useMutation(REMOVE_BOOK_MUTATION, {
+    const [removeBookMutation, {loading}] = useMutation(REMOVE_BOOK_MUTATION, {
         refetchQueries: [{query: GET_All_BOOKS}],
     });
-    return [removeBookMutation];
+    return {removeBookMutation, loading};
 }

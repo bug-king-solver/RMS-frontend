@@ -31,9 +31,9 @@ const BookTable = () => {
                 New
             </button>
             </div>
-            <div className="relative overflow-x-auto rounded-lg border border-gray-200 shadow-md m-5">
+            <div className="relative overflow-x-auto overflow-y:auto rounded-lg border border-gray-200 shadow-md m-5">
                 {
-                    <table className="w-full border-collapse bg-white text-left text-sm text-gray-500">
+                    <table className="w-full border-collapse bg-white text-left text-sm text-gray-500 h-32">
                         <thead className="bg-gray-50">
                             <tr>
                                 <th scope="col" className="px-6 py-4 font-medium text-gray-900">Title</th>
@@ -42,7 +42,7 @@ const BookTable = () => {
                                 <th scope="col" className="px-6 py-4 font-medium text-gray-900">Body</th>
                                 <th scope="col" className="px-6 py-4 font-medium text-gray-900">Action</th>
                             </tr>
-                        </thead> 
+                        </thead>
                         <tbody className="divide-y divide-gray-100 border-t border-gray-100">
                             {
                                 books.map((data: BookItemType) => <TableItem item={data} key={data.id} />)
