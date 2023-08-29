@@ -8,22 +8,22 @@ export const useGetAllBooks = () => {
 }
 
 export const useAddBook = () => {
-    const [addNewBook] = useMutation(ADD_NEW_BOOK_MUTATION, {
+    const [addNewBook, { loading, error }] = useMutation(ADD_NEW_BOOK_MUTATION, {
         refetchQueries: [{query: GET_All_BOOKS}]
     });
-    return [addNewBook];
+    return {addNewBook, loading, error };
 }
 
 export const useUpdateBook = () => {
-    const [updateBook] = useMutation(UPDATE_BOOK_MUTATION, {
+    const [updateBook, {loading, error}] = useMutation(UPDATE_BOOK_MUTATION, {
         refetchQueries: [{query: GET_All_BOOKS}]
     });
-    return [updateBook]
+    return {updateBook, loading, error};
 }
 
 export const useRemoveBook = () => {
-    const [removeBookMutation] = useMutation(REMOVE_BOOK_MUTATION, {
+    const [removeBookMutation, { loading, error}] = useMutation(REMOVE_BOOK_MUTATION, {
         refetchQueries: [{query: GET_All_BOOKS}],
     });
-    return [removeBookMutation];
+    return {removeBookMutation, loading, error};
 }

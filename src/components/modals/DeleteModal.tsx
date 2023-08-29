@@ -1,10 +1,15 @@
 import { useRemoveBook } from "../../graphql/api";
 import { useAppSelector } from "../../hooks/redux-hooks";
 import { ModalProps } from "../../constant";
+import { Spinner } from "../common";
 
 const DeleteModal = ({ onClose }: ModalProps) => {
     const deletableId = useAppSelector(state => state.book.bookState.id);
-    const [removeBookMutation] = useRemoveBook();
+    const {removeBookMutation, loading, error} = useRemoveBook();
+
+    if (loading) {
+        return <Spinner />
+    }
 
     const handleSubmit = () => {
         removeBookMutation({variables: {
