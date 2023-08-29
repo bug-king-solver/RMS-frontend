@@ -27,13 +27,13 @@ const BookTable = () => {
     return (
         <>
             <div className='flex justify-end'>
-            <button className="rounded-lg border-solid border-2 border-gray-300 p-2 mr-5 md:w-40 hover:border-gray-500" onClick={handleAddBook}>
-                New
-            </button>
+                <button className="rounded-lg border-solid border-2 border-gray-300 p-2 mr-5 md:w-40 hover:border-gray-500" onClick={handleAddBook}>
+                    New
+                </button>
             </div>
-            <div className="relative overflow-x-auto overflow-y:auto rounded-lg border border-gray-200 shadow-md m-5">
+            <div className="relative overflow-x-auto overflow-y:auto rounded-lg border border-gray-200 shadow-md m-5 h-96 mt-20">
                 {
-                    <table className="w-full border-collapse bg-white text-left text-sm text-gray-500 h-32">
+                    <table className="w-full border-collapse bg-white text-left text-sm text-gray-500">
                         <thead className="bg-gray-50">
                             <tr>
                                 <th scope="col" className="px-6 py-4 font-medium text-gray-900">Title</th>
